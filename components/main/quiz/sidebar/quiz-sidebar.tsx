@@ -26,34 +26,6 @@ export const QuizSideBar = ({ questions }: { questions: QuestionType[] }) => {
                                 questionIdx={idx}
                             />
                         ))}
-                        {questions.map((question, idx) => (
-                            <QuestionCard
-                                key={`${question.id}-${idx}`}
-                                question={question}
-                                questionIdx={idx}
-                            />
-                        ))}
-                        {questions.map((question, idx) => (
-                            <QuestionCard
-                                key={`${question.id}-${idx}`}
-                                question={question}
-                                questionIdx={idx}
-                            />
-                        ))}
-                        {questions.map((question, idx) => (
-                            <QuestionCard
-                                key={`${question.id}-${idx}`}
-                                question={question}
-                                questionIdx={idx}
-                            />
-                        ))}
-                        {questions.map((question, idx) => (
-                            <QuestionCard
-                                key={`${question.id}-${idx}`}
-                                question={question}
-                                questionIdx={idx}
-                            />
-                        ))}
                     </div>
                 </div>
             </div>

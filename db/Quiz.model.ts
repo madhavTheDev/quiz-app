@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
-
+import type { OptionType, QuestionType, QuizType } from "@/lib/data/types"
 interface IOption {
     option: string;
     isCorrect: boolean;
@@ -23,7 +23,6 @@ export interface IQuiz extends Document {
     maxMarks: number;
     allowedRetries: number;
     minScoreToPass: number;
-    isPublished: boolean;
     createdBy: mongoose.Types.ObjectId;
     createdAt: Date;
     updatedAt: Date;
@@ -131,10 +130,6 @@ const QuizSchema = new Schema<IQuiz>(
             type: Number,
             required: true,
             min: 0,
-        },
-        isPublished: {
-            type: Boolean,
-            default: false,
         },
         createdBy: {
             type: Schema.Types.ObjectId,

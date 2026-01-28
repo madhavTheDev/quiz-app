@@ -1,7 +1,6 @@
 export interface OptionType {
     id: string
     option: string,
-    // isCorrect: boolean,
     weight: number,
 }
 
@@ -11,7 +10,7 @@ export interface QuestionType {
     isMultiCorrect : boolean,
     options : OptionType[],
     maxMarks : number,
-    difficuilty?: 'easy' | 'medium' | 'hard'
+    difficuilty: 'easy' | 'medium' | 'hard'
 }
 
 export interface QuizType {

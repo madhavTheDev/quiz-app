@@ -3,11 +3,12 @@ import { QuizSideBar } from '@/components/main/quiz/sidebar/quiz-sidebar';
 import { fetchQuizById, fetchQuizes } from '@/lib/actions';
 import { Suspense } from 'react';
 import { QuizInitializer } from './quiz-initializor';
+import { Paginate } from './quiz-paginate';
 
 export async function generateStaticParams() {
     const quizes = await fetchQuizes();
-    return quizes.map((quiz)=>({
-        quizId : quiz.id
+    return quizes.map((quiz) => ({
+        quizId: quiz.id
     }))
 }
 
@@ -15,10 +16,10 @@ const QuizPage = async ({ params }: { params: Promise<{ quizId: string }> }) => 
     const { quizId } = await params;
     const quiz = await fetchQuizById(quizId);
     if (!quiz) return null;
-    
+
     return (
         <QuizInitializer quiz={quiz}>
-            <div className="flex h-full w-full relative">
+            <div className="flex h-full w-full">
                 {/* Sidebar */}
                 <Suspense fallback={<>Loading QuestionSideBar...</>}>
                     <QuizSideBar questions={quiz.questions} />
@@ -36,7 +37,10 @@ const QuizPage = async ({ params }: { params: Promise<{ quizId: string }> }) => 
                 </div>
 
                 {/* Pagination */}
-                <div className='absolute bottom-0 w-full h-10 flex flex-row justify-between px-6'></div>
+                <div className='absolute bottom-24 left-40 w-full h-14 gap-4 shrink-0 flex flex-row justify-center items-center px-6'>
+                    <Paginate />
+                </div>
+
             </div>
         </QuizInitializer>
     )

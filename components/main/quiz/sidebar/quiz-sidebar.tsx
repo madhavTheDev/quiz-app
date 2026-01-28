@@ -1,8 +1,6 @@
 // components/main/quiz/sidebar/quiz-sidebar.tsx
 import { QuestionType } from '@/lib/data'
-import React from 'react'
 import { QuestionCard } from './question-card'
-// import { ScrollArea } from '@/components/ui/scroll-area'
 
 export const QuizSideBar = ({ questions }: { questions: QuestionType[] }) => {
     return (

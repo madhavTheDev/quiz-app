@@ -1,11 +1,14 @@
+'use client'
+
 import { QuestionType } from '@/lib/data'
-import React from 'react'
 import { Badge } from '@/components/ui/badge'
 import { CheckCircle2, Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ClientClickCard } from './client-click-card'
+import { useQuestionContext } from '@/components/context/question-context'
 
-export const QuestionCard = ({ question, questionIdx, isAnswered = false, isActive = false }: { question: QuestionType, questionIdx: number, isAnswered?: boolean, isActive?: boolean }) => {
-    const { id: quesId, statement, isMultiCorrect, options, maxMarks, difficuilty = 'medium' } = question
+export const QuestionCard = ({ question, questionIdx, isAnswered = false}: { question: QuestionType, questionIdx: number, isAnswered?: boolean }) => {
+    const { id: _quesId, statement, isMultiCorrect, options, maxMarks, difficuilty = 'medium' } = question
 
     const difficultyColors = {
         easy: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
@@ -13,14 +16,18 @@ export const QuestionCard = ({ question, questionIdx, isAnswered = false, isActi
         hard: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
     }
 
+    const { currQues } = useQuestionContext();
+    const isActive = questionIdx === currQues
+
     return (
         <div
             className={cn(
-                "p-3 rounded-lg border-2 cursor-pointer transition-all hover:shadow-md shrink-0 w-full",
+                "p-3 rounded-lg border-2 cursor-pointer transition-all hover:shadow-md shrink-0 w-full relative isolate overflow-clip",
                 isActive ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
                 isAnswered && !isActive && "bg-muted/50"
             )}
         >
+            <ClientClickCard questionIdx={questionIdx} />
             <div className="flex items-start gap-3">
                 {/* Question Number Circle */}
                 <div className={cn(

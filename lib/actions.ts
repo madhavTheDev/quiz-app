@@ -3,7 +3,7 @@
 import { dbConnect, User, Quiz } from "@/db";
 import { User as UserType } from "@clerk/nextjs/server"
 import { QuizType } from "./data";
-import { cacheTag } from "next/cache";
+// import { cacheTag } from "next/cache";
 
 export const createUser = async (clerkUser: UserType) => {
     const isAuthenticated = !!clerkUser;
@@ -65,7 +65,7 @@ export const fetchQuizById = async (quizId: string): Promise<QuizType | null> =>
     const _connection = await dbConnect();
     const quiz = await Quiz.findOne({ id: quizId }).lean().select("-__v");
     // const quiz = await Quiz.findById(quizId).lean().select("-__v");
-    console.log(quiz);
+    // console.log(quiz);
     if (!quiz) return null;
 
     return {

@@ -4,10 +4,9 @@ import { QuestionType } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
 import { CheckCircle2, Circle } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { ClientClickCard } from './client-click-card'
 import { useQuestionContext } from '@/components/context/question-context'
 
-export const QuestionCard = ({ question, questionIdx, isAnswered = false}: { question: QuestionType, questionIdx: number, isAnswered?: boolean }) => {
+export const QuestionCard = ({ question, questionIdx}: { question: QuestionType, questionIdx: number }) => {
     const { id: _quesId, statement, isMultiCorrect, options, maxMarks, difficuilty = 'medium' } = question
 
     const difficultyColors = {
@@ -16,8 +15,15 @@ export const QuestionCard = ({ question, questionIdx, isAnswered = false}: { que
         hard: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400'
     }
 
-    const { currQues } = useQuestionContext();
+    const { currQues, setCurrQues, options : optionsState } = useQuestionContext();
     const isActive = questionIdx === currQues
+    const optionsAnswered = optionsState[questionIdx] || [];
+    let isAnswered = false;
+    optionsAnswered.forEach((ans)=>{
+        if(ans){ 
+            isAnswered= true
+        }
+    })
 
     return (
         <div
@@ -27,7 +33,9 @@ export const QuestionCard = ({ question, questionIdx, isAnswered = false}: { que
                 isAnswered && !isActive && "bg-muted/50"
             )}
         >
-            <ClientClickCard questionIdx={questionIdx} />
+            <span className="absolute inset-0 z-10"
+                onClick={() => setCurrQues(questionIdx)}
+            />
             <div className="flex items-start gap-3">
                 {/* Question Number Circle */}
                 <div className={cn(

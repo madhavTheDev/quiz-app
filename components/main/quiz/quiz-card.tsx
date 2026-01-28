@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { QuizType } from "@/lib/data"
 import { Trophy, RefreshCw, FileText } from "lucide-react"
-import Link from "next/link"
+import { TotalQuestionSetter } from "./_client-totalQuestions"
 
 export const QuizCard = ({ quiz }: { quiz: QuizType }) => {
     return (
@@ -43,11 +43,11 @@ export const QuizCard = ({ quiz }: { quiz: QuizType }) => {
                 </div>
             </CardContent>
             <CardFooter className="pt-3">
-                <Link href={`quiz/${quiz.id}`} className="w-full">
-                    <Button className="w-full">
-                        Start Quiz
-                    </Button>
-                </Link>
+                    <TotalQuestionSetter len={quiz.questions.length} quizId={quiz.id}>
+                        <Button className="w-full">
+                            Start Quiz
+                        </Button>
+                    </TotalQuestionSetter>
             </CardFooter>
         </Card>
     )

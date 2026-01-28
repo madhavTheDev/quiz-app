@@ -19,7 +19,7 @@ if (!cached) {
 
 export async function dbConnect() {
     if (cached.conn) {
-        console.log("🚀 Using existing database connection");
+        // console.log("🚀 Using existing database connection");
         return cached.conn;
     }
 

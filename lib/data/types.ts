@@ -9,6 +9,7 @@ export interface QuestionType {
     statement : string,
     isMultiCorrect : boolean,
     options : OptionType[],
+    //TODO: [OptionType,OptionType,OptionType,OptionType]
     maxMarks : number,
     difficuilty: 'easy' | 'medium' | 'hard'
 }

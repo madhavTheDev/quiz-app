@@ -3,7 +3,9 @@
 import { useQuestionContext } from '@/components/context/question-context'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useSubmitQuiz  } from "@/components/main/quiz/use-submit-quiz"
 import { ArrowBigRight, ArrowBigLeft } from "lucide-react"
+import { usePathname, useRouter } from 'next/navigation'
 
 const QuizPaginate = ({ offset }: { offset: -1 | 1 }) => {
     const { currQues, setCurrQues, totalQuestions } = useQuestionContext();
@@ -33,15 +35,26 @@ export const Paginate = () => {
     const { currQues, totalQuestions } = useQuestionContext();
     const isLast = (currQues === totalQuestions - 1)
 
+    const path = usePathname();
+    const router = useRouter();
+    const quizId = path.split("/")[2];
+    const submitMutation = useSubmitQuiz(quizId);
+
     const handleSubmit = () => {
         console.log("Submit")
+        submitMutation.mutate();
+        if(!submitMutation.isError){
+            console.log("Submitted Successfully");
+            router.push(`/`);
+        }
     }
+
 
     return <>
         <QuizPaginate offset={-1} />
         <Button
             onClick={handleSubmit}
-            disabled={!isLast}
+            disabled={!isLast || submitMutation.isPending}
             className={cn("hover:ring-2 hover:ring-primary tracking-tighter transition-all duration-300 text-shadow-2xs", isLast ? "opacity-100" : "opacity-0")}
         >
             Submit

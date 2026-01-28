@@ -147,6 +147,7 @@ QuizSchema.path('minScoreToPass').validate(function (this: IQuiz, value: number)
     return value <= this.maxMarks;
 }, 'Minimum score to pass cannot exceed maximum marks');
 
-const Quiz: Model<IQuiz> = mongoose.models.Quiz || mongoose.model<IQuiz>('Quiz', QuizSchema);
+const 
+Quiz: Model<IQuiz> = mongoose.models.Quiz || mongoose.model<IQuiz>('Quiz', QuizSchema);
 
 export default Quiz;

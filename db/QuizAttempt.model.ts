@@ -7,22 +7,6 @@ interface IAnswer {
     marksObtained: number;
 }
 
-export interface IQuizAttempt extends Document {
-    userId: mongoose.Types.ObjectId;
-    quizId: mongoose.Types.ObjectId;
-    answers: IAnswer[];
-    totalScore: number;
-    maxScore: number;
-    percentage: number;
-    isPassed: boolean;
-    attemptNumber: number;
-    startedAt: Date;
-    submittedAt?: Date;
-    timeTaken?: number; // in seconds
-    createdAt: Date;
-    updatedAt: Date;
-}
-
 const AnswerSchema = new Schema<IAnswer>(
     {
         questionId: {
@@ -45,6 +29,19 @@ const AnswerSchema = new Schema<IAnswer>(
     },
     { _id: false }
 );
+
+export interface IQuizAttempt extends Document {
+    userId: mongoose.Types.ObjectId;
+    quizId: mongoose.Types.ObjectId;
+    answers: IAnswer[];
+    totalScore: number;
+    maxScore: number;
+    percentage: number;
+    isPassed: boolean;
+    attemptNumber: number;
+    createdAt: Date;
+    updatedAt: Date
+}
 
 const QuizAttemptSchema = new Schema<IQuizAttempt>(
     {
@@ -88,18 +85,6 @@ const QuizAttemptSchema = new Schema<IQuizAttempt>(
             type: Number,
             required: true,
             min: 1,
-        },
-        startedAt: {
-            type: Date,
-            required: true,
-            default: Date.now,
-        },
-        submittedAt: {
-            type: Date,
-        },
-        timeTaken: {
-            type: Number, // seconds
-            min: 0,
         },
     },
     {

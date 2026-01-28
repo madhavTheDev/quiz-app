@@ -2,7 +2,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { UserButton } from '@clerk/nextjs'
-import { createUser } from '@/lib/actions'
+import { getOrCreateUser } from '@/lib/actions'
 import { Suspense } from 'react'
 
 
@@ -11,7 +11,7 @@ export const Navbar = async () => {
     const isAuthenticated = !!clerkUser;
     // console.log(isAuthenticated,userId,user);
     if (isAuthenticated) {
-        await createUser(clerkUser);
+        await getOrCreateUser(clerkUser);
     }
 
     return (

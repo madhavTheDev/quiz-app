@@ -24,7 +24,7 @@ export const Navbar = async () => {
                     Quizio
                 </Link>
             </span>
-            {isUserAdmin ? <Link href={"/create"} className='text-sm tracking-wide text-center w-full'>Create Quiz</Link> : <div className='flex-1' />}
+            {isUserAdmin ? <Link href={"/dashboard"} className='text-sm tracking-wide text-center w-full'>Dashboard</Link> : <div className='flex-1' />}
             {/* Auth Actions */}
             <Suspense fallback={<div>Loading...</div>}>
                 <div>
